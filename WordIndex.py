@@ -7,6 +7,23 @@ def main():
   textFile = open("fish.txt", 'r')
   
   words = {} #create an empty dictionary
+
+  line_number = 0
+
+  for line in textFile:
+    line_number += 1
+
+    clean_line = line.strip().lower()
+    clean_line = clean_line.replace(",", "").replace(".", "").replace("!", "").replace("?", "")
+
+    for word in clean_line.split():
+      if word not in words:
+        words[word] = [line_number]
+      else:
+        if line_number not in words[word]:
+          words[word].append(line_number)
+
+  textFile.close()          
   
   
   print ("fish" in words) #is a word already in the dictionary?
